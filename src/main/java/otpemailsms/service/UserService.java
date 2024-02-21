@@ -20,6 +20,7 @@ public class UserService {
 
     public void verifyEmail(User user) {
         user.setEmailVerified(true);
+        userRepository.save(user);
     }
 
     public User getUserByMobile(String mobile) {
@@ -30,5 +31,10 @@ public class UserService {
     public void verifyMobile(User user) {
         user.setMobileVerified(true);
         userRepository.save(user);
+    }
+
+    public boolean isEmailVerified(String email) {
+        User user = userRepository.findByEmail(email);
+        return user!=null && user.isEmailVerified();
     }
 }
